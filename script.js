@@ -1,7 +1,8 @@
 
 (() => {
+
   // ==========================================
-  // COUNTDOWN: Every Wednesday at 18:00
+  // COUNTDOWN: EVERY WEDNESDAY AT 18:00
   // ==========================================
 
   const fields = {
@@ -28,8 +29,7 @@
   function updateCountdown() {
     const now = new Date();
     const target = nextWednesday18(now);
-    const remaining = Math.max(0, target - now);
-
+    const remaining = Math.max(0, target.getTime() - now.getTime());
     const totalSeconds = Math.floor(remaining / 1000);
 
     fields.days.textContent =
@@ -51,6 +51,7 @@
 
   // ==========================================
   // YOUTUBE UPLOAD DETECTION
+  // GREEN FOR 36 HOURS AFTER UPLOAD
   // ==========================================
 
   const dot = document.getElementById("upload-status-dot");
@@ -60,9 +61,9 @@
   const RSS_URL =
     `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
 
-  const GREEN_DURATION = 36 * 60 * 60 * 1000; // 36 hours
+  const GREEN_DURATION = 36 * 60 * 60 * 1000;
 
-  const CHECK_INTERVAL = 5 * 60 * 1000; // 5 minutes
+  const CHECK_INTERVAL = 5 * 60 * 1000;
 
   function setStatus(isNew, message) {
     if (!dot) return;
@@ -73,10 +74,12 @@
   }
 
   async function checkLatestUpload() {
-    // Default to RED until a real upload is confirmed.
+
+    // Default to red until an upload is confirmed.
     setStatus(false, "Wachten op nieuwe aflevering");
 
     try {
+
       const apiUrl =
         "https://api.rss2json.com/v1/api.json?rss_url=" +
         encodeURIComponent(RSS_URL);
@@ -91,51 +94,64 @@
 
       const data = await response.json();
 
-      if (data.status !== "ok" || !data.items?.length) {
+      if (
+        data.status !== "ok" ||
+        !Array.isArray(data.items) ||
+        data.items.length === 0
+      ) {
         throw new Error("No YouTube uploads found");
       }
 
-      // Find the newest actual upload.
-      const latestUpload = data.items
+      // Get the newest published video.
+      const timestamps = data.items
         .map(item => new Date(item.pubDate).getTime())
-        .filter(timestamp => Number.isFinite(timestamp))
-        .sort((a, b) => b - a)[0];
+        .filter(timestamp => Number.isFinite(timestamp));
 
-      if (!latestUpload) {
+      if (timestamps.length === 0) {
         throw new Error("Invalid upload date");
       }
 
+      const latestUpload = Math.max(...timestamps);
       const age = Date.now() - latestUpload;
 
-      // Green ONLY during the first 36 hours after upload.
+      // Green only during the first 36 hours.
       if (age >= 0 && age < GREEN_DURATION) {
+
         const hoursLeft = Math.ceil(
           (GREEN_DURATION - age) / (60 * 60 * 1000)
         );
 
         setStatus(
           true,
-          `Nieuwe aflevering online! Nog ${hoursLeft} uur groen.`
+          `Nieuwe aflevering online! Nog ongeveer ${hoursLeft} uur groen.`
         );
+
       } else {
+
         setStatus(
           false,
           "Wachten op nieuwe aflevering"
         );
+
       }
 
     } catch (error) {
+
       console.warn("YouTube upload check failed:", error);
 
-      // Never show green when upload status is unknown.
-      setStatus(false, "YouTube uploadstatus niet beschikbaar");
+      // If YouTube cannot be checked, remain red.
+      setStatus(
+        false,
+        "YouTube uploadstatus niet beschikbaar"
+      );
+
     }
   }
 
-  // Check immediately when website loads.
+  // Check immediately.
   checkLatestUpload();
 
-  // Check again every 5 minutes.
+  // Check every five minutes.
   setInterval(checkLatestUpload, CHECK_INTERVAL);
 
 })();
