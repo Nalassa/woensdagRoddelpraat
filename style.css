@@ -54,7 +54,21 @@ body {
   font-size: clamp(12px, 1vw, 15px); font-weight: 800;
   letter-spacing: .15em; margin: 0 0 12px;
 }
-.live-dot { width: 9px; height: 9px; border-radius: 50%; background: #e94b9b; box-shadow: 0 0 12px #e94b9b; }
+.live-dot {
+  width: 9px;
+  height: 9px;
+  min-width: 9px;
+  border-radius: 50%;
+  background: #ed3030;
+  box-shadow: 0 0 12px rgba(237, 48, 48, .7);
+  transition: background .3s ease, box-shadow .3s ease;
+}
+
+/* New episode uploaded */
+.live-dot.is-new {
+  background: #20df69;
+  box-shadow: 0 0 14px rgba(32, 223, 105, .85);
+}
 .video-frame {
   position: relative; flex: 1; min-height: 0;
   overflow: hidden; border-radius: 10px; background: #08030e;
