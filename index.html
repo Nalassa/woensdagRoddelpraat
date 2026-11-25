@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#32105d">
+  <title>Roddelpraat TV</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="screen">
+    <header class="hero" aria-label="Roddelpraat TV">
+      <img src="roddelpraat-banner.webp" alt="Roddelpraat TV — elke woensdag om 18:00" class="banner">
+    </header>
+
+    <section class="content">
+      <div class="episode">
+        <div class="section-heading">
+          <span class="live-dot"></span>
+          <span id="episode-label">NIEUWSTE AFLEVERING</span>
+        </div>
+        <div class="video-frame">
+          <!-- Uploads-playlist: YouTube toont automatisch de nieuwste upload eerst. -->
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/videoseries?list=UUNSlMHXTIYWUFaJSUPyidLQ&rel=0"
+            title="Nieuwste Roddelpraat aflevering"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <a class="youtube-link" href="https://www.youtube.com/@RoddelPraatTV" target="_blank" rel="noopener">
+          Bekijk het kanaal op YouTube <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <aside class="countdown">
+        <div class="countdown-kicker">DE VOLGENDE RODDELPRAAT</div>
+        <h1>Woensdag<br><span>18:00 uur</span></h1>
+        <p class="intro">Nog even geduld…</p>
+        <div class="timer" aria-label="Aftellen tot de volgende aflevering">
+          <div class="time-unit"><strong id="days">00</strong><small>DAGEN</small></div>
+          <div class="separator">:</div>
+          <div class="time-unit"><strong id="hours">00</strong><small>UREN</small></div>
+          <div class="separator">:</div>
+          <div class="time-unit"><strong id="minutes">00</strong><small>MINUTEN</small></div>
+          <div class="separator">:</div>
+          <div class="time-unit"><strong id="seconds">00</strong><small>SECONDEN</small></div>
+        </div>
+        <div class="schedule">
+          <span class="schedule-icon">◷</span>
+          Iedere woensdag om 18:00
+        </div>
+        <div class="brand-mark">RODDELPRAAT <b>TV</b></div>
+      </aside>
+    </section>
+    <footer>Alle afleveringen op <a href="https://www.youtube.com/@RoddelPraatTV" target="_blank" rel="noopener">YouTube</a></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

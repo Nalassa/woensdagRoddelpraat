@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --purple: #32105d;
+  --purple-deep: #1d0838;
+  --purple-light: #8f50c6;
+  --white: #fff;
+}
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+body {
+  color: var(--white);
+  background:
+    radial-gradient(ellipse at 82% 78%, rgba(126,64,174,.26), transparent 42%),
+    linear-gradient(135deg, #21083e 0%, #3b1769 54%, #1d0838 100%);
+  font-family: Montserrat, Arial, sans-serif;
+}
+.screen {
+  width: 100%;
+  height: 100svh;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(10px, 1.5vw, 24px) clamp(12px, 2.2vw, 36px) 10px;
+  gap: clamp(10px, 1.4vh, 18px);
+}
+.hero {
+  flex: 0 0 25%;
+  min-height: 110px;
+  max-height: 270px;
+  overflow: hidden;
+  border-radius: 13px;
+  background: #35145d;
+  box-shadow: 0 12px 36px rgba(0,0,0,.28);
+}
+.banner { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 48%; }
+.content {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.48fr) minmax(320px, .9fr);
+  gap: clamp(14px, 2vw, 30px);
+}
+.episode, .countdown {
+  min-height: 0;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 16px;
+  background: rgba(18, 5, 37, .52);
+  box-shadow: 0 15px 40px rgba(0,0,0,.22);
+}
+.episode { display: flex; flex-direction: column; padding: clamp(12px, 1.5vw, 22px); }
+.section-heading {
+  display: flex; align-items: center; gap: 10px;
+  font-size: clamp(12px, 1vw, 15px); font-weight: 800;
+  letter-spacing: .15em; margin: 0 0 12px;
+}
+.live-dot { width: 9px; height: 9px; border-radius: 50%; background: #e94b9b; box-shadow: 0 0 12px #e94b9b; }
+.video-frame {
+  position: relative; flex: 1; min-height: 0;
+  overflow: hidden; border-radius: 10px; background: #08030e;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.youtube-link {
+  align-self: flex-start; margin-top: 11px; color: #e6cfff;
+  text-decoration: none; font-size: clamp(11px, .85vw, 13px); font-weight: 700;
+}
+.youtube-link:hover, footer a:hover { color: #fff; text-decoration: underline; }
+.countdown {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(18px, 2.5vw, 38px);
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(143,80,198,.32), transparent 58%),
+    rgba(18,5,37,.62);
+}
+.countdown-kicker { color: #d8b5f6; font-size: clamp(10px, .9vw, 13px); font-weight: 800; letter-spacing: .19em; }
+h1 {
+  margin: 13px 0 5px; font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: clamp(38px, 5.1vw, 76px); line-height: .88; font-weight: 900;
+  text-transform: uppercase; text-shadow: 0 5px 0 rgba(0,0,0,.18);
+}
+h1 span { color: #e7c9ff; }
+.intro { margin: 16px 0 18px; color: rgba(255,255,255,.72); font-size: clamp(12px, 1vw, 15px); }
+.timer { display: flex; justify-content: center; align-items: center; gap: clamp(4px, .8vw, 12px); }
+.time-unit { min-width: 0; display: flex; flex-direction: column; align-items: center; }
+.time-unit strong {
+  font-family: "Barlow Condensed", Impact, sans-serif; font-size: clamp(34px, 4vw, 61px);
+  font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums;
+}
+.time-unit small { margin-top: 5px; color: #c9a6e8; font-size: clamp(8px, .65vw, 10px); font-weight: 800; letter-spacing: .12em; }
+.separator { align-self: flex-start; padding-top: 2px; color: #a66bd5; font-size: clamp(22px, 2.8vw, 40px); font-weight: 700; }
+.schedule {
+  margin: clamp(20px, 3vh, 34px) auto 0; padding: 10px 16px;
+  border-radius: 999px; background: rgba(255,255,255,.09);
+  color: #f1e5fb; font-size: clamp(10px, .85vw, 13px); font-weight: 700;
+}
+.schedule-icon { margin-right: 7px; color: #d9b5f5; font-size: 17px; vertical-align: -1px; }
+.brand-mark { margin-top: clamp(18px, 3vh, 34px); color: rgba(255,255,255,.34); font-size: clamp(10px, .9vw, 13px); font-weight: 900; letter-spacing: .22em; }
+.brand-mark b { color: rgba(255,255,255,.65); }
+footer { flex: 0 0 auto; text-align: center; color: rgba(255,255,255,.45); font-size: 10px; }
+footer a { color: rgba(255,255,255,.7); text-decoration: none; }
+
+@media (max-width: 760px) {
+  html, body { overflow: hidden; }
+  .screen { height: 100svh; min-height: 0; padding: 8px; gap: 8px; }
+  .hero { flex: 0 0 17%; min-height: 70px; }
+  .content { display: flex; flex: 1; min-height: 0; flex-direction: column; gap: 8px; }
+  .episode { flex: 0 0 48%; min-height: 0; padding: 9px; }
+  .section-heading { margin-bottom: 7px; font-size: 10px; }
+  .youtube-link { margin-top: 6px; font-size: 10px; }
+  .countdown { flex: 1; min-height: 0; padding: 10px; }
+  .countdown-kicker { font-size: 9px; }
+  h1 { margin: 7px 0 2px; font-size: clamp(30px, 8vw, 46px); }
+  .intro { margin: 6px 0 8px; font-size: 10px; }
+  .time-unit strong { font-size: clamp(27px, 7vw, 40px); }
+  .time-unit small { font-size: 7px; }
+  .separator { font-size: 23px; }
+  .schedule { margin-top: 9px; padding: 7px 12px; font-size: 9px; }
+  .brand-mark { margin-top: 8px; font-size: 9px; }
+  footer { display: none; }
+}
+@media (max-height: 650px) and (min-width: 761px) {
+  .hero { flex-basis: 20%; min-height: 85px; }
+  .countdown { padding: 12px 20px; }
+  h1 { margin-top: 8px; font-size: clamp(34px, 4vw, 54px); }
+  .intro { margin: 8px 0 10px; }
+  .schedule { margin-top: 12px; }
+  .brand-mark { margin-top: 12px; }
+}
